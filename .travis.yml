@@ -15,8 +15,8 @@ env:
 dist: trusty
 
 arch:
-  - amd64
-  - arm64
+- amd64
+- arm64
 
 python:
   - 3.5
