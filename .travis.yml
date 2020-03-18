@@ -14,6 +14,10 @@ env:
     - secure: "YIEZal9EBTL+fg2YmoZoS8Bvt3eAVUOZjb38CtqpzR2CCSXWoUk35KG23m2NknlY1iKfYJyt7XWBszT/VKOQEbWQq7PIakV4vIByrWacgBxy1x3WC+rZoW7TX+JJiL+y942qIYbMoNMMB8xFpE5RDLSjSecMpFhJJXoafVTvju8="
 dist: trusty
 
+arch:
+  - amd64
+  - arm64
+
 python:
   - 3.5
 
@@ -49,54 +53,6 @@ matrix:
       sudo: true
       env:
         - SPLIT="2/2" TEST_SYMPY="true"
-    - arch: arm64
-      python: 3.8
-      dist: xenial
-      sudo: true
-      env:
-        - SPLIT="1/8" TEST_SYMPY="true"
-    - arch: arm64
-      python: 3.8
-      dist: xenial
-      sudo: true
-      env:
-        - SPLIT="2/8" TEST_SYMPY="true"
-    - arch: arm64
-      python: 3.8
-      dist: xenial
-      sudo: true
-      env:
-        - SPLIT="3/8" TEST_SYMPY="true"
-    - arch: arm64
-      python: 3.8
-      dist: xenial
-      sudo: true
-      env:
-        - SPLIT="4/8" TEST_SYMPY="true"
-    - arch: arm64
-      python: 3.8
-      dist: xenial
-      sudo: true
-      env:
-        - SPLIT="5/8" TEST_SYMPY="true"
-    - arch: arm64
-      python: 3.8
-      dist: xenial
-      sudo: true
-      env:
-        - SPLIT="6/8" TEST_SYMPY="true"
-    - arch: arm64
-      python: 3.8
-      dist: xenial
-      sudo: true
-      env:
-        - SPLIT="7/8" TEST_SYMPY="true"
-    - arch: arm64
-      python: 3.8
-      dist: xenial
-      sudo: true
-      env:
-        - SPLIT="8/8" TEST_SYMPY="true"
     - python: 3.7
       dist: xenial
       # At the time of writing this is Python 3.7 but it will become 3.8 when
