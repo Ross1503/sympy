@@ -474,7 +474,6 @@ before_install:
 install:
   # If a command fails, fail the build.
   - set -e
-  - apt-get install tensorflow
   - if [ "$TRAVIS_PYTHON_VERSION" = "pypy" ];
       then virtualenv -p /usr/bin/pypy3 ~/.venv;
            . ~/.venv/bin/activate;
