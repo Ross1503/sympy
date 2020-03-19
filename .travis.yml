@@ -51,8 +51,8 @@ matrix:
         - SYMPY_STRICT_COMPILER_CHECKS=1
       addons:
         apt:
+          update: true
           packages:
-            # for theano
             - libatlas-dev
             - libatlas-base-dev
             - liblapack-dev
