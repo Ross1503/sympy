@@ -51,6 +51,7 @@ matrix:
         - SYMPY_STRICT_COMPILER_CHECKS=1
       addons:
         apt:
+          clean: true
           update: true
           packages:
             - libatlas-dev
