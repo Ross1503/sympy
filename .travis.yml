@@ -141,7 +141,7 @@ matrix:
       # all of the dependencies are supported on 3.8.
       env:
         - TEST_ASCII="true"
-        - TEST_OPT_DEPENDENCY="matchpy numpy scipy gmpy2 matplotlib theano llvmlite autowrap cython wurlitzer python-symengine=0.5.1 tensorflow numexpr ipython antlr-python-runtime>=4.7,<4.8 antlr>=4.7,<4.8 cloudpickle pyglet pycosat lfortran python-clang lxml"
+        - TEST_OPT_DEPENDENCY="matchpy numpy scipy gmpy2 matplotlib theano llvmlite autowrap cython wurlitzer python-symengine=0.5.1 numexpr ipython antlr-python-runtime>=4.7,<4.8 antlr>=4.7,<4.8 cloudpickle pyglet pycosat lfortran python-clang lxml"
         - TEST_SAGE="true"
         - SYMPY_STRICT_COMPILER_CHECKS=1
       addons:
@@ -435,7 +435,7 @@ before_install:
           bash archiconda.sh -b -p $HOME/miniconda;
           SUDO=sudo;
           $SUDO cp -r $HOME/miniconda/bin/* /usr/bin/;
-          #$SUDO rm /usr/bin/lsb_release;
+          $SUDO rm /usr/bin/lsb_release;
         else
           wget http://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
           bash miniconda.sh -b -p $HOME/miniconda;
@@ -450,7 +450,7 @@ before_install:
 
         $SUDO conda info -a;
         $SUDO conda create -q -n test-environment ${TEST_OPT_DEPENDENCY};
-        source activate test-environment;
+        $SUDO source activate test-environment;
         export CPATH=$CONDA_PREFIX/include;
         export LIBRARY_PATH=$CONDA_PREFIX/lib;
         export LD_LIBRARY_PATH=$CONDA_PREFIX/lib;
