@@ -34,7 +34,8 @@ matrix:
         apt:
           packages:
             # for theano
-            - update: true
+            - apt:
+                update: true
             - libatlas-dev
             - libatlas-base-dev
             - liblapack-dev
