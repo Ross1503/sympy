@@ -134,6 +134,25 @@ matrix:
             - liblapack-dev
             - gfortran
             - python-scipy
+    - arch: arm64
+      python: 3.7
+      dist: xenial
+      # At the time of writing this is Python 3.7 but it will become 3.8 when
+      # all of the dependencies are supported on 3.8.
+      env:
+        - TEST_ASCII="true"
+        - TEST_OPT_DEPENDENCY="matchpy numpy scipy gmpy2 matplotlib theano llvmlite autowrap cython wurlitzer python-symengine=0.5.1 tensorflow numexpr ipython antlr-python-runtime>=4.7,<4.8 antlr>=4.7,<4.8 cloudpickle pyglet pycosat lfortran python-clang lxml"
+        - TEST_SAGE="true"
+        - SYMPY_STRICT_COMPILER_CHECKS=1
+      addons:
+        apt:
+          packages:
+            # for theano
+            - libatlas-dev
+            - libatlas-base-dev
+            - liblapack-dev
+            - gfortran
+            - python-scipy
     - stage: test
       python: 2.7
       dist: xenial
@@ -385,6 +404,10 @@ matrix:
     - env:
         - BENCHMARK="true"
 
+env:
+  global:
+    - SUDO=""
+
 before_install:
   - set -e
   - python -c "import fcntl; fcntl.fcntl(1, fcntl.F_SETFL, 0)"
@@ -406,25 +429,35 @@ before_install:
     # We do this conditionally because it saves us some downloading if the
     # version is the same.
         deactivate; # Deactivate the Travis virtualenv
-        wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -q -O miniconda.sh;
-        bash miniconda.sh -b -p $HOME/miniconda;
+        if [[ "$TRAVIS_CPU_ARCH" == "arm64" ]]; then
+          wget -q "https://github.com/Archiconda/build-tools/releases/download/0.2.3/Archiconda3-0.2.3-Linux-aarch64.sh" -O archiconda.sh;
+          chmod +x archiconda.sh;
+          bash archiconda.sh -b -p $HOME/miniconda;
+          SUDO=sudo;
+          $SUDO cp -r $HOME/miniconda/bin/* /usr/bin/;
+          #$SUDO rm /usr/bin/lsb_release;
+        else
+          wget http://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+          bash miniconda.sh -b -p $HOME/miniconda;
+        #wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -q -O miniconda.sh;
+        #bash miniconda.sh -b -p $HOME/miniconda;
         export PATH="$HOME/miniconda/bin:$PATH";
         hash -r;
-        conda config --set always_yes yes --set changeps1 no;
-        conda update -q conda;
-        conda config --prepend channels conda-forge --prepend channels symengine/label/dev;
+        $SUDO conda config --set always_yes yes --set changeps1 no;
+        $SUDO conda update -q conda;
+        $SUDO conda config --prepend channels conda-forge --prepend channels symengine/label/dev;
 
-        conda info -a;
-        conda create -q -n test-environment ${TEST_OPT_DEPENDENCY};
+        $SUDO conda info -a;
+        $SUDO conda create -q -n test-environment ${TEST_OPT_DEPENDENCY};
         source activate test-environment;
         export CPATH=$CONDA_PREFIX/include;
         export LIBRARY_PATH=$CONDA_PREFIX/lib;
         export LD_LIBRARY_PATH=$CONDA_PREFIX/lib;
-        conda clean --all;
+        $SUDO conda clean --all;
         if [[ "$TEST_SAGE" == "true" ]]; then
             # Use a separate environment because sage downgrades matplotlib
-            conda create -c conda-forge/label/cf201901 -n sage sagelib mpmath "ipython>=5.5.0,<6";
-            conda clean --all;
+            $SUDO conda create -c conda-forge/label/cf201901 -n sage sagelib mpmath "ipython>=5.5.0,<6";
+            $SUDO conda clean --all;
         fi
     elif [ "$TRAVIS_PYTHON_VERSION" != "pypy" ]; then
         pip list | grep "numpy" && pip uninstall -y numpy;
