@@ -20,158 +20,9 @@ python:
 matrix:
   fast_finish: true
   include:
-    - stage: baseline
-      python: 3.7
-      dist: xenial
-      # At the time of writing this is Python 3.7 but it will become 3.8 when
-      # all of the dependencies are supported on 3.8.
-      env:
-        - TEST_ASCII="true"
-        - TEST_OPT_DEPENDENCY="matchpy numpy scipy gmpy2 matplotlib theano llvmlite autowrap cython wurlitzer python-symengine=0.5.1 tensorflow numexpr ipython antlr-python-runtime>=4.7,<4.8 antlr>=4.7,<4.8 cloudpickle pyglet pycosat lfortran python-clang lxml"
-        - TEST_SAGE="true"
-        - SYMPY_STRICT_COMPILER_CHECKS=1
-      addons:
-        apt:
-          update: true
-          packages:
-            - libatlas-dev
-            - libatlas-base-dev
-            - liblapack-dev
-            - gfortran
-            - python-scipy
-    - python: 3.7
-      arch: arm64
-      dist: xenial
-      # At the time of writing this is Python 3.7 but it will become 3.8 when
-      # all of the dependencies are supported on 3.8.
-      env:
-        - TEST_ASCII="true"
-        - TEST_OPT_DEPENDENCY="matchpy numpy scipy gmpy2 matplotlib theano llvmlite autowrap cython wurlitzer python-symengine=0.5.1 tensorflow numexpr ipython antlr-python-runtime>=4.7,<4.8 antlr>=4.7,<4.8 cloudpickle pyglet pycosat lfortran python-clang lxml"
-        - TEST_SAGE="true"
-        - SYMPY_STRICT_COMPILER_CHECKS=1
-      addons:
-        apt:
-          clean: true
-          update: true
-          packages:
-            - libatlas-dev
-            - libatlas-base-dev
-            - liblapack-dev
-            - gfortran
-            - python-scipy
     - stage: test
-      # Tensorflow 1 support
-      python: 3.6
-      env:
-        - TEST_OPT_DEPENDENCY="tensorflow<2 python=3"
-        - TEST_TENSORFLOW_1=true
-    - arch: arm64
-      python: 3.6
-      env:
-        - TEST_OPT_DEPENDENCY="tensorflow<2 python=3"
-        - TEST_TENSORFLOW_1=true
-        
-    - python: 3.8
-      dist: xenial
-      env:
-        - TEST_SPHINX="true"
-        - FASTCACHE="false"
-      addons:
-        apt:
-          packages:
-            - graphviz
-            - inkscape
-            - texlive
-            - texlive-xetex
-            - texlive-fonts-recommended
-            - texlive-latex-extra
-            - latexmk
-            - lmodern
-            - librsvg2-bin
-            - imagemagick
-            - docbook2x
-    - arch: arm64
-      python: 3.8
-      dist: xenial
-      env:
-        - TEST_SPHINX="true"
-        - FASTCACHE="false"
-      addons:
-        apt:
-          packages:
-            - graphviz
-            - inkscape
-            - texlive
-            - texlive-xetex
-            - texlive-fonts-recommended
-            - texlive-latex-extra
-            - latexmk
-            - lmodern
-            - librsvg2-bin
-            - imagemagick
-            - docbook2x
-
-    - python: 3.8
-      dist: xenial
-      env:
-        - TEST_SLOW="true"
-        - SPLIT="1/2"
-    - python: 3.8
-      dist: xenial
-      env:
-        - TEST_SLOW="true"
-        - SPLIT="2/2"
-    - arch: arm64
-      python: 3.8
-      dist: xenial
-      env:
-        - TEST_SLOW="true"
-        - SPLIT="1/8"
-    - arch: arm64
-      python: 3.8
-      dist: xenial
-      env:
-        - TEST_SLOW="true"
-        - SPLIT="2/8"
-    - arch: arm64
-      python: 3.8
-      dist: xenial
-      env:
-        - TEST_SLOW="true"
-        - SPLIT="3/8"
-    - arch: arm64
-      python: 3.8
-      dist: xenial
-      env:
-        - TEST_SLOW="true"
-        - SPLIT="4/8"
-    - arch: arm64
-      python: 3.8
-      dist: xenial
-      env:
-        - TEST_SLOW="true"
-        - SPLIT="5/8"
-    - arch: arm64
-      python: 3.8
-      dist: xenial
-      env:
-        - TEST_SLOW="true"
-        - SPLIT="6/8"
-    - arch: arm64
-      python: 3.8
-      dist: xenial
-      env:
-        - TEST_SLOW="true"
-        - SPLIT="7/8"
-    - arch: arm64
-      python: 3.8
-      dist: xenial
-      env:
-        - TEST_SLOW="true"
-        - SPLIT="8/8"
-
     # Code coverage tests
-    - python: 3.6
+      python: 3.6
       dist: xenial
       env:
         - TEST_SYMPY="true"
@@ -195,6 +46,62 @@ matrix:
         - TEST_SYMPY="true"
         - TEST_COVERAGE="true"
         - SPLIT="4/4"
+    - arch: arm64
+      python: 3.6
+      dist: xenial
+      env:
+        - TEST_SYMPY="true"
+        - TEST_COVERAGE="true"
+        - SPLIT="1/8"
+    - arch: arm64
+      python: 3.6
+      dist: xenial
+      env:
+        - TEST_SYMPY="true"
+        - TEST_COVERAGE="true"
+        - SPLIT="2/8"
+    - arch: arm64
+      python: 3.6
+      dist: xenial
+      env:
+        - TEST_SYMPY="true"
+        - TEST_COVERAGE="true"
+        - SPLIT="3/8"
+    - arch: arm64
+      python: 3.6
+      dist: xenial
+      env:
+        - TEST_SYMPY="true"
+        - TEST_COVERAGE="true"
+        - SPLIT="4/8"
+    - arch: arm64
+      python: 3.6
+      dist: xenial
+      env:
+        - TEST_SYMPY="true"
+        - TEST_COVERAGE="true"
+        - SPLIT="5/8"
+    - arch: arm64
+      python: 3.6
+      dist: xenial
+      env:
+        - TEST_SYMPY="true"
+        - TEST_COVERAGE="true"
+        - SPLIT="6/8"
+    - arch: arm64
+      python: 3.6
+      dist: xenial
+      env:
+        - TEST_SYMPY="true"
+        - TEST_COVERAGE="true"
+        - SPLIT="7/8"
+    - arch: arm64
+      python: 3.6
+      dist: xenial
+      env:
+        - TEST_SYMPY="true"
+        - TEST_COVERAGE="true"
+        - SPLIT="8/8"
 
     # PyPy randomly fails because of some PyPy bugs
     # (Fatal RPython error: AssertionError)
