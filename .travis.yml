@@ -52,56 +52,84 @@ matrix:
       env:
         - TEST_SYMPY="true"
         - TEST_COVERAGE="true"
-        - SPLIT="1/8"
+        - SPLIT="1/12"
     - arch: arm64
       python: 3.6
       dist: xenial
       env:
         - TEST_SYMPY="true"
         - TEST_COVERAGE="true"
-        - SPLIT="2/8"
+        - SPLIT="2/12"
     - arch: arm64
       python: 3.6
       dist: xenial
       env:
         - TEST_SYMPY="true"
         - TEST_COVERAGE="true"
-        - SPLIT="3/8"
+        - SPLIT="3/12"
     - arch: arm64
       python: 3.6
       dist: xenial
       env:
         - TEST_SYMPY="true"
         - TEST_COVERAGE="true"
-        - SPLIT="4/8"
+        - SPLIT="4/12"
     - arch: arm64
       python: 3.6
       dist: xenial
       env:
         - TEST_SYMPY="true"
         - TEST_COVERAGE="true"
-        - SPLIT="5/8"
+        - SPLIT="5/12"
     - arch: arm64
       python: 3.6
       dist: xenial
       env:
         - TEST_SYMPY="true"
         - TEST_COVERAGE="true"
-        - SPLIT="6/8"
+        - SPLIT="6/12"
     - arch: arm64
       python: 3.6
       dist: xenial
       env:
         - TEST_SYMPY="true"
         - TEST_COVERAGE="true"
-        - SPLIT="7/8"
+        - SPLIT="7/12"
     - arch: arm64
       python: 3.6
       dist: xenial
       env:
         - TEST_SYMPY="true"
         - TEST_COVERAGE="true"
-        - SPLIT="8/8"
+        - SPLIT="8/12"
+    - arch: arm64
+      python: 3.6
+      dist: xenial
+      env:
+        - TEST_SYMPY="true"
+        - TEST_COVERAGE="true"
+        - SPLIT="9/12"
+    - arch: arm64
+      python: 3.6
+      dist: xenial
+      env:
+        - TEST_SYMPY="true"
+        - TEST_COVERAGE="true"
+        - SPLIT="10/12"
+    - arch: arm64
+      python: 3.6
+      dist: xenial
+      env:
+        - TEST_SYMPY="true"
+        - TEST_COVERAGE="true"
+        - SPLIT="11/12"
+    - arch: arm64
+      python: 3.6
+      dist: xenial
+      env:
+        - TEST_SYMPY="true"
+        - TEST_COVERAGE="true"
+        - SPLIT="12/12"
 
     # PyPy randomly fails because of some PyPy bugs
     # (Fatal RPython error: AssertionError)
